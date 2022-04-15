@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys, struct, lz4.block, os.path
 
@@ -13,7 +13,7 @@ def main():
 
 	header = compressed_data[:4]
 
-	if header != 'XALZ':
+	if header.decode('utf-8') != 'XALZ':
 		sys.exit("[!] Wrong header, aborting...!")
 
 	packed_payload_len = compressed_data[8:12]
@@ -28,8 +28,8 @@ def main():
 
 	with open(out_file, "wb") as decompressed_file:
 		decompressed_file.write(decompressed_payload)
-		print "[i] Success!"
-		print "[i] File [" + out_file + "] was created as result!"
+		print("[i] Success!")
+		print("[i] File [" + out_file + "] was created as result!")
 
 if __name__ == "__main__":
 	main()
